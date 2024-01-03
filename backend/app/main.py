@@ -49,7 +49,6 @@ def update_user(
 
     db_user.username = user.username
     db_user.password = user.password
-    db_user.email = user.email
     session.commit()
     session.refresh(db_user)
 
