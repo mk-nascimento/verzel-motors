@@ -9,6 +9,35 @@ readme = "README.md"
 python = "^3.10"
 fastapi = "^0.108.0"
 uvicorn = {extras = ["standard"], version = "^0.25.0"}
+python-dotenv = "^1.0.0"
+sqlalchemy = "^2.0.24"
+psycopg2-binary = "^2.9.9"
+pydantic-settings = "^2.1.0"
+alembic = "^1.13.1"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.12.2"
+isort = "^5.13.2"
+blue = "^0.9.1"
+ruff = "^0.1.11"
+
+[tool.blue]
+extend-exclude = "(migrations/)"
+
+[tool.isort]
+profile = "black"
+line_length = 79
+extend_skip = ["migrations"]
+
+[tool.ruff]
+line-length = 88
+exclude = [".venv", "migrations"]
+
+[tool.taskipy.tasks]
+clear = "py3clean ."
+lint = "ruff . && blue --check . --diff"
+format = "blue .  && isort ."
+run = "uvicorn app.main:app --reload"
 
 [build-system]
 requires = ["poetry-core"]
