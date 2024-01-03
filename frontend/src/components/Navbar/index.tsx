@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Pathnames from "src/enums/Pathnames";
@@ -6,20 +7,21 @@ interface Props {
   signin?: boolean;
 }
 export default function Navbar({ signin }: Readonly<Props>) {
-  const content: string = signin ? "start" : "between";
+  const [content, setContent] = useState<"between" | "start">("between");
+
+  useEffect(
+    function () {
+      if (signin) setContent("start");
+      else setContent("between");
+    },
+    [signin],
+  );
 
   return (
-    <div
-      aria-label="navbar container"
-      className="sticky left-0 top-0 z-[1] h-24 w-full bg-brand-100 px-8 py-4"
-    >
+    <div aria-label="navbar container" className="sticky left-0 top-0 z-[1] h-24 w-full bg-brand-100 px-8 py-4">
       <nav className={`flex h-full w-full items-center justify-${content}`}>
         <Link className="h-full" to={Pathnames.Homepage}>
-          <img
-            className="h-full"
-            src="/src/assets/verzel.svg"
-            alt="verzel-motors logo"
-          />
+          <img className="h-full" src="/src/assets/verzel.svg" alt="verzel-motors logo" />
         </Link>
 
         {!signin && (
