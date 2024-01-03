@@ -1,4 +1,8 @@
+import { useState } from "react";
+import Form, { TTitle } from "src/components/Forms/Form";
+
 export default function DisconnectedContainer() {
+  const [title, setTitle] = useState<TTitle>("Iniciar Sessão");
   return (
     <div
       id="disconnected-container"
@@ -10,7 +14,9 @@ export default function DisconnectedContainer() {
         id="background-image"
         className="hidden flex-[1] flex-col gap-4 overflow-y-auto bg-[url(/src/assets/background-car.svg)] bg-cover bg-right-bottom p-8 shadow-md md:flex"
       />
-      <main className="flex-[2] bg-gray-100">{}</main>
+      <main className="flex flex-[2] items-center justify-center bg-gray-100">
+        {<Form title={title} setTitle={setTitle} />}
+      </main>
     </div>
   );
 }

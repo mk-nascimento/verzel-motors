@@ -26,9 +26,18 @@
 
 @layer components {
   .details {
-    @apply border border-x-0 border-gray-500 border-y-[0.5] flex flex-col gap-4;
+    @apply flex flex-col gap-4 border border-x-0 border-gray-500 border-y-[0.5];
   }
   .summary {
     @apply flex cursor-pointer items-center justify-between text-xl font-semibold;
+  }
+  .small-tip {
+    @apply text-sm font-light text-gray-400;
+  }
+  .small-tip__button {
+    @apply capitalize font-medium text-base underline text-gray-500;
+  }
+  .input {
+    @apply w-full rounded-lg border border-solid border-gray-200 bg-gray-100 px-6 py-4 text-gray-700 placeholder-gray-300 outline-none focus:border-gray-300;
   }
 }
