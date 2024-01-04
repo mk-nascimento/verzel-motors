@@ -20,6 +20,7 @@ O backend é desenvolvido utilizando FastAPI, com Poetry como gerenciador de dep
 
 ```bash
 
+pip install poetry
 cd backend
 poetry install   # Instalar as dependências
 poetry run uvicorn app.main:app --reload   # Iniciar o servidor de desenvolvimento
