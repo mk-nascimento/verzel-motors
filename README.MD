@@ -17,12 +17,14 @@ Certifique-se de manter o código e os comentários em inglês, conforme a conve
 Backend
 
 O backend é desenvolvido utilizando FastAPI, com Poetry como gerenciador de dependências. Siga as instruções abaixo para começar:
+Bando de dados usado: [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-316192?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
 ```bash
 
 pip install poetry
 cd backend
 poetry install   # Instalar as dependências
+poetry run alembic upgrade head   # Executar migrações no banco de dados
 poetry run uvicorn app.main:app --reload   # Iniciar o servidor de desenvolvimento
 
 ```
