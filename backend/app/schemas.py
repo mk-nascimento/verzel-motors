@@ -28,3 +28,25 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+
+class VehicleSchema(BaseModel):
+    name: str
+    make: str
+    model: str
+    photo: str
+
+
+class VehiclePublic(VehicleSchema):
+    id: int
+    user_id: int
+
+
+class VehicleList(BaseModel):
+    vehicles: list[VehiclePublic]
+
+
+class VehicleUpdate(BaseModel):
+    title: str | None = None
+    description: str | None = None
+    completed: str | None = None
