@@ -21,7 +21,7 @@ Bando de dados usado: [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-
 
 ```bash
 
-pip install poetry
+pip install "poetry>=1.7.1,<1.8"
 cd backend
 poetry install   # Instalar as dependências
 poetry run alembic upgrade head   # Executar migrações no banco de dados
