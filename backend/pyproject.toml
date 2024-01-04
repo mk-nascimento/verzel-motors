@@ -18,7 +18,7 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.6"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.dev-dependencies]
 taskipy = "^1.12.2"
 isort = "^5.13.2"
 blue = "^0.9.1"
