@@ -11,4 +11,4 @@ class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str]
     password: Mapped[str]
-    is_superuser: Mapped[str]
+    is_superuser: Mapped[str] = mapped_column(default=True)
