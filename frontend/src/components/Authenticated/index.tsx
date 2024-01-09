@@ -1,9 +1,23 @@
 import axios from "axios";
-import { Navigate, Outlet } from "react-router-dom";
-import Pathnames from "src/enums/Pathnames";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+import CookiesKeys from "src/enums/Cookies";
 export const Authenticated = () => {
-  axios.defaults.headers.common.Authorization = `Bearer `;
-  const bool = true;
+  const [authToken, setAuthToken] = useState<{ token: string }>();
 
-  return bool ? <Outlet /> : <Navigate to={Pathnames.Session} />;
+  useEffect(function () {
+    const token = Cookies.get(CookiesKeys.Token);
+    if (token) setAuthToken({ token });
+    else localStorage.clear();
+  }, []);
+
+  useEffect(
+    function () {
+      if (authToken) axios.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+    },
+    [authToken],
+  );
+
+  return <Outlet />;
 };
