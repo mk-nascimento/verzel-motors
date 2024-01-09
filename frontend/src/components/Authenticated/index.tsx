@@ -14,7 +14,7 @@ export const Authenticated = () => {
 
   useEffect(
     function () {
-      if (authToken) axios.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+      if (authToken) axios.defaults.headers.common.Authorization = `Bearer ${authToken.token}`;
     },
     [authToken],
   );
