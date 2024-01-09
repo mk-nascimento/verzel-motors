@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import CarList from "src/components/CarsList";
-import mock from "src/local/mock";
+import useVehicle from "src/hooks/useVehicle";
+import { Vehicle } from "src/interfaces";
+import FilterItem from "./FilterItem";
 
 interface Base {
-  id: string;
+  id: number;
 }
 
 interface Make extends Base {
@@ -13,28 +16,32 @@ interface Model extends Base {
   model: string;
 }
 
-interface Year extends Base {
-  year: number;
-}
-
 export default function MainContainer() {
-  const brands: Make[] = mock.vehicles.reduce((acc, { id, make }) => {
-    if (!acc.some((brand) => brand.make === make)) acc.push({ id, make });
+  const { getVehicles } = useVehicle();
+  const [cars, setCars] = useState<Vehicle[]>([]);
 
-    return acc.sort((a, b) => a.make.localeCompare(b.make));
+  useEffect(
+    function () {
+      async function fetch() {
+        const { vehicles } = await getVehicles();
+        setCars(vehicles ?? []);
+      }
+
+      fetch();
+    },
+    [getVehicles],
+  );
+  const brands: Make[] = cars.reduce((arr, { id, make }) => {
+    if (!arr.some((brand) => brand.make === make)) arr.push({ id, make });
+
+    return arr.sort((a, b) => a.make.localeCompare(b.make));
   }, [] as Make[]);
 
-  const models: Model[] = mock.vehicles.reduce((acc, { id, model }) => {
-    if (!acc.some((brand) => brand.model === model)) acc.push({ id, model });
+  const models: Model[] = cars.reduce((arr, { id, model }) => {
+    if (!arr.some((brand) => brand.model === model)) arr.push({ id, model });
 
-    return acc.sort((a, b) => a.model.localeCompare(b.model));
+    return arr.sort((a, b) => a.model.localeCompare(b.model));
   }, [] as Model[]);
-
-  const years: Year[] = mock.vehicles.reduce((acc, { id, year }) => {
-    if (!acc.some((brand) => brand.year === year)) acc.push({ id, year });
-
-    return acc.sort((a, b) => a.year - b.year);
-  }, [] as Year[]);
 
   return (
     <div
@@ -49,32 +56,23 @@ export default function MainContainer() {
       >
         <details className="details">
           <summary className="summary">Marca</summary>
-          <ul className="" aria-label="filter options">
+          <ul className="flex flex-col gap-1" aria-label="filter options">
             {brands.map(({ id, make }) => (
-              <li key={id}>{make}</li>
+              <FilterItem key={id} content={make} onClick={() => console.log(make)} />
             ))}
           </ul>
         </details>
 
         <details className="details">
           <summary className="summary">Modelo</summary>
-          <ul className="" aria-label="filter options">
+          <ul className="flex flex-col gap-1" aria-label="filter options">
             {models.map(({ id, model }) => (
-              <li key={id}>{model}</li>
-            ))}
-          </ul>
-        </details>
-
-        <details className="details">
-          <summary className="summary">Ano</summary>
-          <ul className="" aria-label="filter options">
-            {years.map(({ id, year }) => (
-              <li key={id}>{year}</li>
+              <FilterItem key={id} content={model} onClick={() => console.log(model)} />
             ))}
           </ul>
         </details>
       </aside>
-      <main className="flex-[2] bg-gray-100">{<CarList />}</main>
+      <main className="flex-[2] bg-gray-100">{<CarList cars={cars} />}</main>
     </div>
   );
 }

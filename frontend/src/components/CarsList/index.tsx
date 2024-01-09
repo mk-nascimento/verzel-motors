@@ -1,28 +1,15 @@
 import { HTMLAttributes } from "react";
-import mock from "src/local/mock";
+import { Vehicle } from "src/interfaces";
 import CarCard from "./CardCar";
 
-interface Props extends Omit<HTMLAttributes<HTMLUListElement>, "className"> {}
-export default function CarList(_props: Props) {
-  const cars = mock.vehicles.sort(
-    (a, b) =>
-      +a.price.split(" ")[1].split(",")[0].replace(".", "") -
-      +b.price.split(" ")[1].split(",")[0].replace(".", ""),
-  );
+interface Props extends Omit<HTMLAttributes<HTMLUListElement>, "className"> {
+  cars: Vehicle[];
+}
+export default function CarList({ cars, ..._props }: Readonly<Props>) {
   return (
-    <ul
-      className="gap grid h-full grid-cols-2 gap-5 overflow-y-auto p-8 md:grid-cols-3"
-      {..._props}
-    >
+    <ul className="gap grid h-full grid-cols-2 gap-5 overflow-y-auto p-8 md:grid-cols-3" {..._props}>
       {cars.map((car) => (
-        <CarCard
-          key={car.id}
-          make={car.make}
-          model={car.model}
-          photo={car.photo}
-          price={car.price}
-          year={car.year}
-        />
+        <CarCard key={car.id} make={car.make} model={car.model} name={car.name} photo={car.photo} price={car.price} />
       ))}
     </ul>
   );
