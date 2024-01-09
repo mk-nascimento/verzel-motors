@@ -39,10 +39,10 @@ export default function Form({ title, setTitle }: Readonly<Props>) {
     function () {
       switch (title) {
         case "Iniciar Sessão":
-          return <HeaderTips buttonText="cadastre-se" tip="Já possui uma conta ?" onClick={handleTitle} />;
+          return <HeaderTips content="cadastre-se" tip="Já possui uma conta ?" onClick={handleTitle} />;
 
         case "Cadastre-se":
-          return <HeaderTips buttonText="iniciar sessão" tip="Ainda não é cadastrado ?" onClick={handleTitle} />;
+          return <HeaderTips content="iniciar sessão" tip="Ainda não é cadastrado ?" onClick={handleTitle} />;
       }
     },
     [handleTitle, title],
