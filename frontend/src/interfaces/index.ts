@@ -21,3 +21,8 @@ export interface Vehicle {
 export interface VehicleListResponse {
   vehicles: Vehicle[];
 }
+
+export interface SessionStorage {
+  uname: string;
+  loggedIn: boolean;
+}
