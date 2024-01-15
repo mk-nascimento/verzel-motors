@@ -35,6 +35,7 @@ class VehicleSchema(BaseModel):
     make: str
     model: str
     photo: str
+    price: int
 
 
 class VehiclePublic(VehicleSchema):
@@ -47,6 +48,6 @@ class VehicleList(BaseModel):
 
 
 class VehicleUpdate(BaseModel):
-    title: str | None = None
-    description: str | None = None
-    completed: str | None = None
+    name: str | None
+    photo: str | None
+    price: int | None
