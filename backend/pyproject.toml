@@ -40,7 +40,10 @@ exclude = [".venv", "migrations"]
 clear = "py3clean ."
 lint = "ruff . && blue --check . --diff"
 format = "blue .  && isort ."
-run = "uvicorn app.main:app --reload"
+dev = "uvicorn app.main:app --reload"
+prod = "uvicorn app.main:app --host 0.0.0.0"
+make-migrate = "alembic revisons --autogenerate"
+run-migrations = "alembic upgrade head"
 
 [build-system]
 requires = ["poetry-core"]
