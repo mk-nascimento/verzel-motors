@@ -38,4 +38,6 @@ app.add_middleware(
 
 @app.get('/')
 def read_root():
-    return {'message': 'Olá Mundo!'}
+    return RedirectResponse(
+        '/docs', status_code=status.HTTP_307_TEMPORARY_REDIRECT
+    )
