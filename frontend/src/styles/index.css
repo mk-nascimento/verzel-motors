@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply box-border scrollbar-thin scrollbar-track-gray-50 scrollbar-thumb-gray-200 scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg hover:scrollbar-thumb-gray-300;
+    @apply select-none box-border scrollbar-thin scrollbar-track-gray-50 scrollbar-thumb-gray-200 scrollbar-track-rounded-lg scrollbar-thumb-rounded-lg hover:scrollbar-thumb-gray-300;
   }
 
   summary::-webkit-details-marker,
